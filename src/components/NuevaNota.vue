@@ -4,7 +4,7 @@
         <v-row class="mx-auto">
             <v-col>
                 <v-form ref="formulario" @submit.prevent>
-                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="validar" maxlength="100"></v-text-field>
+                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="validar" minlenght="4" maxlength="100"></v-text-field>
                     <v-textarea :label="labelTe" v-model="texto" :rules="valTexto" required @input="validar"></v-textarea>
                     <v-select
                         @change="validar"
@@ -60,7 +60,8 @@
         props: ["arrNotas", "edicion"],
         methods: {
             guardar(){
-                if(this.validar()){
+                //vuetify no valida correctamente con trim, se evitará que guarde las notas sin título (espacios vacíos)
+                if(this.validar() && this.titulo.length > 3){
                     let nota = {};
                     nota.id = this.identificacion;
                     nota.ti = this.titulo.toUpperCase();
@@ -83,8 +84,10 @@
             validar(){
                 this.levantarTexto();
                 if(this.$refs.formulario.validate()){
-                    this.validado = true;
-                    return this.$refs.formulario.validate();
+                    if(this.titulo.length > 3){
+                        this.validado = true;
+                        return this.$refs.formulario.validate();
+                    }
                 }
                 this.validado = false;
                 return this.$refs.formulario.validate();
@@ -102,6 +105,7 @@
                 this.titulo = this.edicion.ti;
                 this.texto = this.edicion.te;
                 this.prioridad = this.edicion.pr;
+                this.validado = true;
             }else{
                 this.nueva = true;
                 this.identificacion = Date.now();
