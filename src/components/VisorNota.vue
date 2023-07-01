@@ -20,7 +20,7 @@
                             {{nota.fe}} - {{nota.pr}}
                         </v-card-text>
                         <v-card-text>
-                            {{nota.te}}
+                            <p>{{nota.te}}</p>
                         </v-card-text>
                     </v-card>
                 </v-col>
@@ -76,5 +76,11 @@
         height: 100%;
         padding-top: 100px;
         background: #fff;
+    }
+
+    p{
+        max-height: 400px;
+        white-space: pre-wrap;
+        overflow: auto;
     }
 </style>
