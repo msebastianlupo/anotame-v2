@@ -4,7 +4,7 @@
       <v-app-bar app dark>
         <v-app-bar-nav-icon @click="drawer = !drawer"/>
         <v-spacer />
-        <v-toolbar-title>Anotame</v-toolbar-title>
+        <v-toolbar-title>Anotame v2</v-toolbar-title>
       </v-app-bar>
       <v-navigation-drawer app dark v-model="drawer" temporary>
         <v-list

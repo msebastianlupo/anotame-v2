@@ -1,11 +1,15 @@
 <template>
-    <div class="acerca-cont">
-        <h1 class="h1-especial">{{h1}}</h1>
-        <h2>{{h2}}</h2>
-        <p v-if="sinBorrado">{{p}}</p>
-        <p v-else>{{pBorrado}}</p>
-        <button v-if="sinBorrado" class="btn-cta" @dblclick="borrarDatos">Borrar</button>
-    </div>
+    <v-container>
+        <v-row>
+            <v-col class="mt-5 text-center">
+                <h1>{{h1}}</h1>
+                <h2>{{h2}}</h2>
+                <p v-if="sinBorrado">{{p}}</p>
+                <p v-else>{{pBorrado}}</p>
+                <v-btn class="secondary" v-if="sinBorrado" @dblclick="borrarDatos">Borrar</v-btn>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -14,8 +18,8 @@
         data:
             function() {
                 return {
-                    h1: "Anotame - © 2023 Matías Godoy",
-                    h2: "Creá notas sin descargar nada - V. 23.05.24",
+                    h1: "Anotame v2 - © 2023 Matías Godoy",
+                    h2: "Creá notas sin descargar nada - V. 23.06.29",
                     sinBorrado: true,
                     p: "Para borrar todos los datos de la app, presioná el botón 2 veces.",
                     pBorrado: "Listo, borraste todos los datos locales de la app.",
