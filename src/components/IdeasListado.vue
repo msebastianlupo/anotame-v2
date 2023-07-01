@@ -1,9 +1,13 @@
 <template>
     <v-container>
-        <div class="d-flex my-5"><h1>{{h1}}</h1></div>
-        <v-btn @click="obtenerIdeas" block class="mb-10">Obtener ideas</v-btn>
         <v-row>
-            <v-col align="center">
+            <v-col class="mt-5 text-center">
+                <h1>{{h1}}</h1>
+                <v-btn class="my-3" @click="obtenerIdeas" block>Obtener ideas</v-btn>
+            </v-col>
+        </v-row>
+        <v-row class="text-center">
+            <v-col>
                 <v-chip
                     v-for="(idea, index) in lista" :key="index"
                     class="ma-2"
