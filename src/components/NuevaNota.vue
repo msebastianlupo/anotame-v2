@@ -4,7 +4,7 @@
         <v-row class="mx-auto">
             <v-col>
                 <v-form ref="formulario" @submit.prevent>
-                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="validar"></v-text-field>
+                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="validar" maxlength="100"></v-text-field>
                     <v-textarea :label="labelTe" v-model="texto" :rules="valTexto" required @input="validar"></v-textarea>
                     <v-select
                         @change="validar"
