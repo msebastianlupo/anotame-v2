@@ -81,6 +81,7 @@
                 }
             },
             validar(){
+                this.levantarTexto();
                 if(this.$refs.formulario.validate()){
                     this.validado = true;
                     return this.$refs.formulario.validate();

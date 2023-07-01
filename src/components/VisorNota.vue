@@ -33,7 +33,7 @@
         >
         <v-card>
             <v-card-text class="pt-2">
-                A punto de borrar una nota. ¿Continuar?
+                <b>La nota {{nota.ti}} se va a borrar. Este proceso no se puede revertir</b>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
