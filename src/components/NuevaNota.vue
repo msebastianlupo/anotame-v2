@@ -4,19 +4,20 @@
         <v-row class="mx-auto">
             <v-col>
                 <v-form ref="formulario" @submit.prevent>
-                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="levantarTexto"></v-text-field>
-                    <v-textarea :label="labelTe" v-model="texto" :rules="valTexto" required></v-textarea>
+                    <v-text-field :label="labelTi" v-model.trim="titulo" :rules="valTitulo" required @input="validar"></v-text-field>
+                    <v-textarea :label="labelTe" v-model="texto" :rules="valTexto" required @input="validar"></v-textarea>
                     <v-select
+                        @change="validar"
                         v-model="prioridad"
                         :items="arrPrioridad"
                         :label="labelPr"
                         required
-                        item-value="NUEVA"
+                        item-value=""
                         :rules="[(v) => !!v || 'Tenés que seleccionar la prioridad']"
                     >
                     </v-select>
                     <v-btn class="mt-2 ml-2" @click="$emit('cancelado')">Cancelar</v-btn>
-                    <v-btn type="submit" class="mt-2 ml-2 success" @click="guardar()">Guardar</v-btn>
+                    <v-btn type="submit" :class="['mt-2', 'ml-2', validado ? 'success' : 'error']" @click="guardar">Guardar</v-btn>
                 </v-form>
             </v-col>
         </v-row>
@@ -32,6 +33,7 @@
                 return {
                     nueva: true,
                     arrPrioridad: ["BAJA", "REGULAR", "IMPORTANTE", "URGENTE"],
+                    validado: false,
                     identificacion: 0,
                     titulo: "",
                     texto: "",
@@ -50,7 +52,7 @@
                     valTexto: [
                         value => {
                         if (value?.length > 19) return true
-                            return 'El título debe llevar 4 caracteres como mínimo'
+                            return 'La descripción debe tener al menos una longitud de 20 caracteres'
                         }
                     ]
                 }
@@ -79,7 +81,12 @@
                 }
             },
             validar(){
-              return this.$refs.formulario.validate();
+                if(this.$refs.formulario.validate()){
+                    this.validado = true;
+                    return this.$refs.formulario.validate();
+                }
+                this.validado = false;
+                return this.$refs.formulario.validate();
             },
             levantarTexto(){
                 this.titulo = this.titulo.toUpperCase();
